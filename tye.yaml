@@ -1,0 +1,31 @@
+# tye application configuration file
+# read all about it at https://github.com/dotnet/tye
+#
+# when you've given us a try, we'd love to know what you think:
+#    https://aka.ms/AA7q20u
+#
+name: restaurant-app-microservices
+services:
+- name: customer-api
+  project: src/Services/Customer/Customer.API/Customer.API.csproj
+- name: kitchen-api
+  project: src/Services/Kitchen/Kitchen.API/Kitchen.API.csproj
+- name: ordering-api
+  project: src/Services/Ordering/Ordering.API/Ordering.API.csproj
+- name: restaurant-api
+  project: src/Services/Restaurant/Restaurant.API/Restaurant.API.csproj
+- name: sqlserver
+  image: mcr.microsoft.com/mssql/server:2017-latest
+  env:
+    - SA_PASSWORD=Pass@word
+    - ACCEPT_EULA=Y
+  bindings:
+  - port: 1433
+- name: redis
+  image: redis
+  bindings:
+  - port: 6379
+    connectionString: ${host}:${port}
+- name: redis-cli
+  image: redis
+  args: "redis-cli -h redis MONITOR"
