@@ -1,7 +1,7 @@
 parameters:
   image: ''
   branch: ''
-  registry: 'DotNetFullMasterStack'
+  registry: 'dotnetfullmasterstack'
   registryEndpoint: ''
 
 jobs:

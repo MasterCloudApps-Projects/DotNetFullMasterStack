@@ -1,5 +1,5 @@
 variables:
-    registryEndpoint: DotNetFullMasterStack
+    registryEndpoint: dotnetfullmasterstack
 trigger:
   branches:
     include:
