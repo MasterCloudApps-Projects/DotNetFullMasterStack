@@ -1,8 +1,8 @@
 version: '3.4'
 
 services:
-  customer.api:
-    image: ${REGISTRY:-dotnetfullmasterstack}/customerapi:${PLATFORM:-linux}-${TAG:-latest}
+  customer-api:
+    image: ${REGISTRY:-dotnetfullmasterstack}/customer.api:${PLATFORM:-linux}-${TAG:-latest}
     build:
       context: .
       dockerfile: Services/Customer/Customer.API/Dockerfile
