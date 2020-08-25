@@ -5,4 +5,4 @@ services:
     image: ${DOCKER_REGISTRY-}customerapi
     build:
       context: .
-      dockerfile: src/Services/Customer/Customer.API/Dockerfile
+      dockerfile: Services/Customer/Customer.API/Dockerfile

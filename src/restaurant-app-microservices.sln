@@ -15,23 +15,23 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ordering", "Ordering", "{95
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Kitchen", "Kitchen", "{D4F789C0-2823-44CC-A9FD-F6E32D0CDBED}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Customer.API", "src\Services\Customer\Customer.API\Customer.API.csproj", "{7E7931A4-59AB-4D09-BB20-C579F8B389A4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Customer.API", "Services\Customer\Customer.API\Customer.API.csproj", "{7E7931A4-59AB-4D09-BB20-C579F8B389A4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kitchen.API", "src\Services\Kitchen\Kitchen.API\Kitchen.API.csproj", "{757B55F0-952B-457D-886E-6D8F4C5A1221}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kitchen.API", "Services\Kitchen\Kitchen.API\Kitchen.API.csproj", "{757B55F0-952B-457D-886E-6D8F4C5A1221}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ordering.API", "src\Services\Ordering\Ordering.API\Ordering.API.csproj", "{8EEE9716-0BD8-40C3-A72B-CAF2402634E8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ordering.API", "Services\Ordering\Ordering.API\Ordering.API.csproj", "{8EEE9716-0BD8-40C3-A72B-CAF2402634E8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Restaurant.API", "src\Services\Restaurant\Restaurant.API\Restaurant.API.csproj", "{AD679D3D-A5F2-4940-8409-CB736A42B562}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Restaurant.API", "Services\Restaurant\Restaurant.API\Restaurant.API.csproj", "{AD679D3D-A5F2-4940-8409-CB736A42B562}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{E1BE42FD-F6DD-4523-91BB-C8EB7C36D66F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Customer.FunctionalTests", "src\Services\Customer\Customer.FunctionalTests\Customer.FunctionalTests.csproj", "{B1642994-8D56-4D04-B2C5-A2BA9C29206B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Customer.FunctionalTests", "Services\Customer\Customer.FunctionalTests\Customer.FunctionalTests.csproj", "{B1642994-8D56-4D04-B2C5-A2BA9C29206B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Customer.UnitTest", "src\Services\Customer\Customer.UnitTest\Customer.UnitTest.csproj", "{E9C77F47-B195-4C28-BF3D-B673A0E698AB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Customer.UnitTest", "Services\Customer\Customer.UnitTest\Customer.UnitTest.csproj", "{E9C77F47-B195-4C28-BF3D-B673A0E698AB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BuildingBlocks", "BuildingBlocks", "{B857D9C5-B36F-4A40-8602-3B581B469BFF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebHostCustomization", "src\BuildingBlocks\WebHostCustomization\WebHostCustomization\WebHostCustomization.csproj", "{EAD76E02-8FE0-4E56-8536-8AE1AD205956}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebHostCustomization", "BuildingBlocks\WebHostCustomization\WebHostCustomization\WebHostCustomization.csproj", "{EAD76E02-8FE0-4E56-8536-8AE1AD205956}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3249E017-A42C-45AC-A688-EC607BE56504}"
 	ProjectSection(SolutionItems) = preProject
