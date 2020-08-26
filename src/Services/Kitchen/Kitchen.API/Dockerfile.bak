@@ -8,9 +8,9 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /src
 COPY ["Services/Kitchen/Kitchen.API/Kitchen.API.csproj", "Services/Kitchen/Kitchen.API/"]
-RUN dotnet restore "Services/Kitchen/Kitchen.API/Kitchen.API.csproj"
+RUN dotnet restore "src/Services/Kitchen/Kitchen.API/Kitchen.API.csproj"
 COPY . .
-WORKDIR "/src/Services/Kitchen/Kitchen.API"
+WORKDIR "/src/src/Services/Kitchen/Kitchen.API"
 RUN dotnet build "Kitchen.API.csproj" -c Release -o /app/build
 
 FROM build AS publish
