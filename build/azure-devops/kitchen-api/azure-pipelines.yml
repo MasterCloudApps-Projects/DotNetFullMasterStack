@@ -1,0 +1,26 @@
+variables:
+    registryEndpoint: dotnetfullmasterstack
+trigger:
+  branches:
+    include:
+    - master
+  paths:
+    include:
+    - src/BuildingBlocks/*
+    - src/Services/Kitchen/*
+    - build/azure-devops/build-jobs.yml
+    - build/azure-devops/build-docker.yml
+    - build/azure-devops/kitchen-api/*
+    - deploy/k8s/helm/kitchen-api/*
+jobs:
+- template: ../build-jobs.yaml
+  parameters:
+    services: kitchen-api
+    registryEndpoint: $(registryEndpoint)
+    helmfrom: $(Build.SourcesDirectory)/deploy/k8s/helm
+    helmto: $(Build.ArtifactStagingDirectory)/deploy/k8s/helm
+- template: ../build-docker.yaml
+  parameters:
+    image: kitchen.api
+    branch: $(Build.SourceBranchName)
+    registryEndpoint: $(registryEndpoint)

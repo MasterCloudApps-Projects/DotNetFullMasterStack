@@ -1,0 +1,24 @@
+version: '3.4'
+
+services:
+  customer-api:
+    image: ${REGISTRY:-dotnetfullmasterstack}/customer.api:${PLATFORM:-linux}-${TAG:-latest}
+    build:
+      context: .
+      dockerfile: Services/Customer/Customer.API/Dockerfile
+  kitchen-api:
+    image: ${REGISTRY:-dotnetfullmasterstack}/kitchen.api:${PLATFORM:-linux}-${TAG:-latest}
+    build:
+      context: .
+      dockerfile: Services/Kitchen/Kitchen.API/Dockerfile
+  ordering-api:
+    image: ${REGISTRY:-dotnetfullmasterstack}/ordering.api:${PLATFORM:-linux}-${TAG:-latest}
+    build:
+      context: .
+      dockerfile: Services/Ordering/Ordering.API/Dockerfile
+  restaurant-api:
+    image: ${REGISTRY:-dotnetfullmasterstack}/restaurant.api:${PLATFORM:-linux}-${TAG:-latest}
+    build:
+      context: .
+      dockerfile: Services/Restaurant/Restaurant.API/Dockerfile   
+      
