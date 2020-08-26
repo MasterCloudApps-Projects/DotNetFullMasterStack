@@ -7,20 +7,20 @@ trigger:
   paths:
     include:
     - src/BuildingBlocks/*
-    - src/Services/Customer/*
+    - src/Services/Restaurant/*
     - build/azure-devops/build-jobs.yml
     - build/azure-devops/build-docker.yml
-    - build/azure-devops/customer-api/*
-    - deploy/k8s/helm/customer-api/*
+    - build/azure-devops/restaurant-api/*
+    - deploy/k8s/helm/restaurant-api/*
 jobs:
 - template: ../build-jobs.yaml
   parameters:
-    services: customer-api
+    services: restaurant-api
     registryEndpoint: $(registryEndpoint)
     helmfrom: $(Build.SourcesDirectory)/deploy/k8s/helm
     helmto: $(Build.ArtifactStagingDirectory)/deploy/k8s/helm
 - template: ../build-docker.yaml
   parameters:
-    image: customer.api
+    image: restaurant.api
     branch: $(Build.SourceBranchName)
     registryEndpoint: $(registryEndpoint)

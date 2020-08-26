@@ -7,20 +7,20 @@ trigger:
   paths:
     include:
     - src/BuildingBlocks/*
-    - src/Services/Customer/*
+    - src/Services/Ordering/*
     - build/azure-devops/build-jobs.yml
     - build/azure-devops/build-docker.yml
-    - build/azure-devops/customer-api/*
-    - deploy/k8s/helm/customer-api/*
+    - build/azure-devops/ordering-api/*
+    - deploy/k8s/helm/ordering-api/*
 jobs:
 - template: ../build-jobs.yaml
   parameters:
-    services: customer-api
+    services: ordering-api
     registryEndpoint: $(registryEndpoint)
     helmfrom: $(Build.SourcesDirectory)/deploy/k8s/helm
     helmto: $(Build.ArtifactStagingDirectory)/deploy/k8s/helm
 - template: ../build-docker.yaml
   parameters:
-    image: customer.api
+    image: ordering.api
     branch: $(Build.SourceBranchName)
     registryEndpoint: $(registryEndpoint)

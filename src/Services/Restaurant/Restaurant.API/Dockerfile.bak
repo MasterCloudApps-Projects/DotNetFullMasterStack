@@ -10,7 +10,7 @@ WORKDIR /src
 COPY ["Services/Restaurant/Restaurant.API/Restaurant.API.csproj", "Services/Restaurant/Restaurant.API/"]
 RUN dotnet restore "Services/Restaurant/Restaurant.API/Restaurant.API.csproj"
 COPY . .
-WORKDIR "/src/Services/Restaurant/Restaurant.API"
+WORKDIR "/src/src/Services/Restaurant/Restaurant.API"
 RUN dotnet build "Restaurant.API.csproj" -c Release -o /app/build
 
 FROM build AS publish
