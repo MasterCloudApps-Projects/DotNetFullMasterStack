@@ -1,0 +1,11 @@
+version: '3.4'
+
+services:
+  customer-api-test:
+    image: ${REGISTRY:-dotnetfullmasterstack}/customer.api-test:${PLATFORM:-linux}-${TAG:-latest}
+    build:
+      context: .
+      dockerfile: Services/Customer/Customer.API/Dockerfile
+      target: unittest
+    volumes:
+      - ${BUILD_ARTIFACTSTAGINGDIRECTORY:-./tests-results/}:/tests
