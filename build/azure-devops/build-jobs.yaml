@@ -49,14 +49,11 @@ jobs:
       testResultsFiles: '**/${{ parameters.services }}-test-results.xml' 
       searchFolder: '$(Build.ArtifactStagingDirectory)'
 
-       #- task: PublishCodeCoverageResults@1
-  #    inputs:
-       #codeCoverageTool: 'JaCoCo' # Options: cobertura, jaCoCo
-  #    summaryFileLocation: 
-       #pathToSources: # Optional
-       #reportDirectory: # Optional
-       #additionalCodeCoverageFiles: # Optional
-       #failIfCoverageEmpty: false # Optional
+  - task: PublishCodeCoverageResults@1
+    inputs:
+      codeCoverageTool: 'Cobertura'
+      reportDirectory: '$(Build.ArtifactStagingDirectory)'
+      summaryFileLocation: '$(Build.ArtifactStagingDirectory)/coverage.cobertura.xml'
   - task: DockerCompose@0
     displayName: Compose build ${{ parameters.services }}
     inputs:
