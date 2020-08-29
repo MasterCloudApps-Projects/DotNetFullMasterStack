@@ -32,6 +32,29 @@ jobs:
     vmImage: 'ubuntu-16.04'
   steps:
   - task: DockerCompose@0
+    displayName: Compose test ${{ parameters.services }}
+    inputs:
+      dockerComposeCommand: 'up --build ${{ parameters.services }}-test'
+      containerregistrytype: Container Registry
+      dockerRegistryEndpoint: ${{ parameters.registryEndpoint }}
+      dockerComposeFile: src/docker-compose-tests.yml
+      additionalDockerComposeFiles: docker-compose-tests.override.yml
+      qualifyImageNames: true
+      projectName: ""
+      dockerComposeFileArgs: |
+        TAG=${{ variables['Build.SourceBranchName'] }}
+  - task: PublishTestResults@2
+    inputs:
+      testResultsFormat: 'VSTest'
+      testResultsFiles: '**/${{ parameters.services }}-test-results.xml' 
+      searchFolder: '$(Build.ArtifactStagingDirectory)'
+
+  - task: PublishCodeCoverageResults@1
+    inputs:
+      codeCoverageTool: 'Cobertura'
+      reportDirectory: '$(Build.ArtifactStagingDirectory)'
+      summaryFileLocation: '$(Build.ArtifactStagingDirectory)/coverage.cobertura.xml'
+  - task: DockerCompose@0
     displayName: Compose build ${{ parameters.services }}
     inputs:
       dockerComposeCommand: 'build ${{ parameters.services }}'
