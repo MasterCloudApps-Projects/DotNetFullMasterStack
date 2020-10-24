@@ -1,6 +1,6 @@
-﻿namespace Kitchen.API.Models
+﻿namespace Ordering.API.Models
 {
-    public class TicketLine
+    public class OrderLine
     {
         public int Id { get; set; }
         public string Name { get; set; }

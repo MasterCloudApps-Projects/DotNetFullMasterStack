@@ -1,22 +1,23 @@
-﻿using Customer.API;
-using Customer.API.Infrastructure;
-using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Restaurant.API;
+using Restaurant.API.Infrastructure;
 using System.IO;
 using System.Reflection;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace Customer.FunctionalTests
+namespace Restaurant.FunctionalTests
 {
-    public abstract class CustomerScenarioBase
+
+    public abstract class RestaurantScenarioBase
     {
-        public static string UrlBase => "api/v1/customer";
+        public static string UrlBase => "api/v1/restaurant";
 
         public TestServer CreateServer()
         {
-            var path = Assembly.GetAssembly(typeof(CustomerScenarioBase))
+            var path = Assembly.GetAssembly(typeof(RestaurantScenarioBase))
                 .Location;
 
             var hostBuilder = new WebHostBuilder()
@@ -32,11 +33,11 @@ namespace Customer.FunctionalTests
             var testServer = new TestServer(hostBuilder);
 
             testServer.Host
-               .MigrateDbContext<CustomerContext>((context, services) =>
+               .MigrateDbContext<RestaurantContext>((context, services) =>
                {
-                   var logger = services.GetService<ILogger<CustomerContextSeed>>();
+                   var logger = services.GetService<ILogger<RestaurantContextSeed>>();
 
-                   new CustomerContextSeed()
+                   new RestaurantContextSeed()
                        .SeedAsync(context, logger)
                        .Wait();
                });
@@ -47,25 +48,25 @@ namespace Customer.FunctionalTests
 
         public static class Get
         {
-            public static string Customers = UrlBase;
+            public static string Restaurants = UrlBase;
 
-            public static string CustomerById(int id) => $"{UrlBase}/{id}";
+            public static string RestaurantById(int id) => $"{UrlBase}/{id}";
 
         }
 
         public static class Post
         {
-            public static string AddNewCustomer = UrlBase;
+            public static string AddNewRestaurant = UrlBase;
         }
 
         public static class Put
         {
-            public static string UpdateCustomer(int id) => $"{UrlBase}/{id}";
+            public static string UpdateRestaurant(int id) => $"{UrlBase}/{id}";
         }
 
         public static class Delete
         {
-            public static string DeleteCustomer(int id)
+            public static string DeleteRestaurant(int id)
                 => $"{UrlBase}/{id}";
         }
     }

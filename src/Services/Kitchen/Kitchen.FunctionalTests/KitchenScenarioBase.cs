@@ -1,5 +1,5 @@
-﻿using Customer.API;
-using Customer.API.Infrastructure;
+﻿using Kitchen.API;
+using Kitchen.API.Infrastructure;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.Configuration;
@@ -8,15 +8,15 @@ using Microsoft.Extensions.Logging;
 using System.IO;
 using System.Reflection;
 
-namespace Customer.FunctionalTests
+namespace Kitchen.FunctionalTests
 {
-    public abstract class CustomerScenarioBase
+    public abstract class KitchenScenarioBase
     {
-        public static string UrlBase => "api/v1/customer";
+        public static string CustomersUrlBase => "api/v1/kitchen";
 
         public TestServer CreateServer()
         {
-            var path = Assembly.GetAssembly(typeof(CustomerScenarioBase))
+            var path = Assembly.GetAssembly(typeof(KitchenScenarioBase))
                 .Location;
 
             var hostBuilder = new WebHostBuilder()
@@ -32,11 +32,11 @@ namespace Customer.FunctionalTests
             var testServer = new TestServer(hostBuilder);
 
             testServer.Host
-               .MigrateDbContext<CustomerContext>((context, services) =>
+               .MigrateDbContext<KitchenContext>((context, services) =>
                {
-                   var logger = services.GetService<ILogger<CustomerContextSeed>>();
+                   var logger = services.GetService<ILogger<KitchenContextSeed>>();
 
-                   new CustomerContextSeed()
+                   new KitchenContextSeed()
                        .SeedAsync(context, logger)
                        .Wait();
                });
@@ -44,29 +44,27 @@ namespace Customer.FunctionalTests
             return testServer;
         }
 
+        public static class Delete
+        {
+            public static string DeleteCustomer(int id)
+                => $"{CustomersUrlBase}/{id}";
+        }
 
         public static class Get
         {
-            public static string Customers = UrlBase;
+            public static string Customers = CustomersUrlBase;
 
-            public static string CustomerById(int id) => $"{UrlBase}/{id}";
-
+            public static string CustomerById(int id) => $"{CustomersUrlBase}/{id}";
         }
 
         public static class Post
         {
-            public static string AddNewCustomer = UrlBase;
+            public static string AddNewCustomer = CustomersUrlBase;
         }
 
         public static class Put
         {
-            public static string UpdateCustomer(int id) => $"{UrlBase}/{id}";
-        }
-
-        public static class Delete
-        {
-            public static string DeleteCustomer(int id)
-                => $"{UrlBase}/{id}";
+            public static string UpdateCustomer(int id) => $"{CustomersUrlBase}/{id}";
         }
     }
 }
