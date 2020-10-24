@@ -9,3 +9,27 @@ services:
       target: unittest
     volumes:
       - ${BUILD_ARTIFACTSTAGINGDIRECTORY:-./tests-results/}:/tests
+  kitchen-api-test:
+    image: ${REGISTRY:-dotnetfullmasterstack}/kitchen.api-test:${PLATFORM:-linux}-${TAG:-latest}
+    build:
+      context: .
+      dockerfile: Services/Kitchen/Kitchen.API/Dockerfile
+      target: unittest
+    volumes:
+      - ${BUILD_ARTIFACTSTAGINGDIRECTORY:-./tests-results/}:/tests
+  ordering-api-test:
+    image: ${REGISTRY:-dotnetfullmasterstack}/ordering.api-test:${PLATFORM:-linux}-${TAG:-latest}
+    build:
+      context: .
+      dockerfile: Services/Ordering/Ordering.API/Dockerfile
+      target: unittest
+    volumes:
+      - ${BUILD_ARTIFACTSTAGINGDIRECTORY:-./tests-results/}:/tests
+  restaurant-api-test:
+    image: ${REGISTRY:-dotnetfullmasterstack}/Restaurant.api-test:${PLATFORM:-linux}-${TAG:-latest}
+    build:
+      context: .
+      dockerfile: Services/Restaurant/Restaurant.API/Dockerfile
+      target: unittest
+    volumes:
+      - ${BUILD_ARTIFACTSTAGINGDIRECTORY:-./tests-results/}:/tests

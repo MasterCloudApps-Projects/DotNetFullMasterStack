@@ -11,3 +11,33 @@ services:
         - /p:CollectCoverage=true 
         - /p:CoverletOutputFormat=cobertura
         - /p:CoverletOutput=/tests/
+  kitchen-api-test:
+    entrypoint:
+        - dotnet
+        - test
+        - --logger
+        - trx;LogFileName=/tests/kitchen-api-test-results.xml
+        - --collect:"XPlat Code Coverage"
+        - /p:CollectCoverage=true 
+        - /p:CoverletOutputFormat=cobertura
+        - /p:CoverletOutput=/tests/
+  ordering-api-test:
+    entrypoint:
+        - dotnet
+        - test
+        - --logger
+        - trx;LogFileName=/tests/ordering-api-test-results.xml
+        - --collect:"XPlat Code Coverage"
+        - /p:CollectCoverage=true 
+        - /p:CoverletOutputFormat=cobertura
+        - /p:CoverletOutput=/tests/
+  restaurant-api-test:
+    entrypoint:
+        - dotnet
+        - test
+        - --logger
+        - trx;LogFileName=/tests/restaurant-api-test-results.xml
+        - --collect:"XPlat Code Coverage"
+        - /p:CollectCoverage=true 
+        - /p:CoverletOutputFormat=cobertura
+        - /p:CoverletOutput=/tests/
