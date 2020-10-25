@@ -16,7 +16,7 @@ namespace Customer.UnitTest
     {
         private readonly DbContextOptions<CustomerContext> dbContextOptions;
 
-        private readonly ILogger<CustomerController> loggerCustomerController;
+        private readonly ILogger<CustomerController> logger;
 
         public CustomerControllerTest()
         {
@@ -29,7 +29,7 @@ namespace Customer.UnitTest
                 dbContext.AddRange(GetFakeData());
                 dbContext.SaveChanges();
             }
-            loggerCustomerController = new Mock<ILogger<CustomerController>>().Object;
+            logger = new Mock<ILogger<CustomerController>>().Object;
         }
 
         [Fact]
@@ -45,8 +45,8 @@ namespace Customer.UnitTest
             var customerContext = new CustomerContext(dbContextOptions);
 
             //Act
-            var customerController = new CustomerController(customerContext, loggerCustomerController);
-            var actionResult = await customerController.GetProductsAsync(pageSize, pageIndex);
+            var customerController = new CustomerController(customerContext, logger);
+            var actionResult = await customerController.GetCustomersAsync(pageSize, pageIndex);
 
             //Assert
             Assert.IsType<ActionResult<PaginatedItemsViewModel<API.Models.Customer>>>(actionResult);

@@ -12,7 +12,7 @@ namespace Customer.FunctionalTests
 {
     public abstract class CustomerScenarioBase
     {
-        public static string CustomersUrlBase => "api/v1/customer";
+        public static string UrlBase => "api/v1/customer";
 
         public TestServer CreateServer()
         {
@@ -47,26 +47,26 @@ namespace Customer.FunctionalTests
 
         public static class Get
         {
-            public static string Customers = CustomersUrlBase;
+            public static string Customers = UrlBase;
 
-            public static string CustomerById(int id) => $"{CustomersUrlBase}/{id}";
+            public static string CustomerById(int id) => $"{UrlBase}/{id}";
 
         }
 
         public static class Post
         {
-            public static string AddNewCustomer = CustomersUrlBase;
+            public static string AddNewCustomer = UrlBase;
         }
 
         public static class Put
         {
-            public static string UpdateCustomer(int id) => $"{CustomersUrlBase}/{id}";
+            public static string UpdateCustomer(int id) => $"{UrlBase}/{id}";
         }
 
         public static class Delete
         {
             public static string DeleteCustomer(int id)
-                => $"{CustomersUrlBase}/{id}";
+                => $"{UrlBase}/{id}";
         }
     }
 }

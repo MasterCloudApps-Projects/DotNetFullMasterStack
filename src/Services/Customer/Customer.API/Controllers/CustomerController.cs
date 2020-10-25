@@ -29,22 +29,20 @@ namespace Customer.API.Controllers
 
         [HttpPost]
         [ProducesResponseType((int)HttpStatusCode.Created)]
-        public async Task<ActionResult> CreateCustoemrAsync([FromBody] Models.Customer customer)
+        public async Task<ActionResult> CreateCustomerAsync([FromBody] Models.Customer customer)
         {
-        
-
             customerContext.Customers.Add(customer);
 
             await customerContext.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetProduct), new { id = customer.Id }, null);
+            return CreatedAtAction(nameof(GetCustomerAsync), new { id = customer.Id }, customer);
         }
 
         [HttpGet]
         [ProducesResponseType(typeof(PaginatedItemsViewModel<Models.Customer>), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(IEnumerable<Models.Customer>), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-        public async Task<ActionResult<PaginatedItemsViewModel<Models.Customer>>> GetProductsAsync([FromQuery] int pageSize = 10, [FromQuery] int pageIndex = 0)
+        public async Task<ActionResult<PaginatedItemsViewModel<Models.Customer>>> GetCustomersAsync([FromQuery] int pageSize = 10, [FromQuery] int pageIndex = 0)
         {
             var totalItems = await customerContext.Customers
                 .LongCountAsync();
@@ -62,32 +60,33 @@ namespace Customer.API.Controllers
         [Route("{id}")]
         [ProducesResponseType(typeof(Models.Customer), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
-        public async Task<ActionResult<Models.Customer>> GetProduct(int id)
+        [ActionName("GetCustomerAsync")]
+        public async Task<ActionResult<Models.Customer>> GetCustomerAsync(int id)
         {
 
-            var product = await customerContext.Customers.SingleOrDefaultAsync(x => x.Id == id);
+            var customer = await customerContext.Customers.SingleOrDefaultAsync(x => x.Id == id);
 
-            if (product == null)
+            if (customer == null)
             {
                 return NotFound();
             }
-            return Ok(product);
+            return Ok(customer);
         }
 
         [Route("{id}")]
         [HttpDelete]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
-        public async Task<ActionResult> DeleteProductAsync(int id)
+        public async Task<ActionResult> DeleteCustomerAsync(int id)
         {
-            var product = customerContext.Customers.SingleOrDefault(x => x.Id == id);
+            var customer = customerContext.Customers.SingleOrDefault(x => x.Id == id);
 
-            if (product == null)
+            if (customer == null)
             {
                 return NotFound();
             }
 
-            customerContext.Customers.Remove(product);
+            customerContext.Customers.Remove(customer);
 
             await customerContext.SaveChangesAsync();
 
