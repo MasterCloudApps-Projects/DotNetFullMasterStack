@@ -1,10 +1,17 @@
 version: '3.4'
 
 services:
+  sqlserver:
+    environment:
+      - SA_PASSWORD=Pass@word
+      - ACCEPT_EULA=Y
+    ports:
+      - "1433:1433"
   customer-api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ConnectionString=${RESTAURANT_DATABASE_SERVER:-Server=sqlserver;Database=restaurant.Services.Customer;User Id=sa;Password=Pass@word} 
     ports:
       - "80"
       - "443"
@@ -15,6 +22,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ConnectionString=${RESTAURANT_DATABASE_SERVER:-Server=sqlserver;Database=restaurant.Services.Kitchen;User Id=sa;Password=Pass@word} 
     ports:
       - "80"
       - "443"
@@ -25,6 +33,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ConnectionString=${RESTAURANT_DATABASE_SERVER:-Server=sqlserver;Database=restaurant.Services.Ordering;User Id=sa;Password=Pass@word} 
     ports:
       - "80"
       - "443"
@@ -35,6 +44,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ConnectionString=${RESTAURANT_DATABASE_SERVER:-Server=sqlserver;Database=restaurant.Services.Restaurant;User Id=sa;Password=Pass@word} 
     ports:
       - "80"
       - "443"

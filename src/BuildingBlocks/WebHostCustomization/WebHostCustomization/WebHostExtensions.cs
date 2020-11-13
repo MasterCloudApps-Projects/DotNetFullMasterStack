@@ -9,7 +9,7 @@ using System.Data.SqlClient;
 
 namespace Microsoft.AspNetCore.Hosting
 {
-    public static class IWebHostExtensions
+    public static class WebHostExtensions
     {
         public static bool IsInKubernetes(this IWebHost webHost)
         {

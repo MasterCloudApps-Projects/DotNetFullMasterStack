@@ -1,24 +1,35 @@
 version: '3.4'
 
 services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2017-latest
+
   customer-api:
     image: ${REGISTRY:-dotnetfullmasterstack}/customer.api:${PLATFORM:-linux}-${TAG:-latest}
     build:
       context: .
       dockerfile: Services/Customer/Customer.API/Dockerfile
+    depends_on:
+      - sqlserver
   kitchen-api:
     image: ${REGISTRY:-dotnetfullmasterstack}/kitchen.api:${PLATFORM:-linux}-${TAG:-latest}
     build:
       context: .
       dockerfile: Services/Kitchen/Kitchen.API/Dockerfile
+    depends_on:
+      - sqlserver
   ordering-api:
     image: ${REGISTRY:-dotnetfullmasterstack}/ordering.api:${PLATFORM:-linux}-${TAG:-latest}
     build:
       context: .
       dockerfile: Services/Ordering/Ordering.API/Dockerfile
+    depends_on:
+      - sqlserver
   restaurant-api:
     image: ${REGISTRY:-dotnetfullmasterstack}/restaurant.api:${PLATFORM:-linux}-${TAG:-latest}
     build:
       context: .
       dockerfile: Services/Restaurant/Restaurant.API/Dockerfile   
+    depends_on:
+      - sqlserver
       
