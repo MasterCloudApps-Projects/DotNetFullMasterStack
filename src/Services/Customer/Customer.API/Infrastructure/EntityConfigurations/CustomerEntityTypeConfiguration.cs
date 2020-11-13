@@ -7,6 +7,8 @@ namespace Customer.API.Infrastructure.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<Models.Customer> builder)
         {
+            builder.ToTable("Customer");
+
             builder.HasKey(o => o.Id);
 
             builder.Property(m => m.Id)

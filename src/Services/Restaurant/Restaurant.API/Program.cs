@@ -1,26 +1,33 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Restaurant.API.Infrastructure;
 
 namespace Restaurant.API
 {
     public class Program
     {
+        public static IWebHost CreateHostBuilder(string[] args) =>
+           WebHost.CreateDefaultBuilder(args)
+           .UseStartup<Startup>()
+           .Build();
+
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
-        }
+            var host = CreateHostBuilder(args);
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
+            host.MigrateDbContext<RestaurantContext>((context, services) =>
+            {
+                var logger = services.GetService<ILogger<RestaurantContextSeed>>();
+
+                new RestaurantContextSeed()
+                    .SeedAsync(context, logger)
+                    .Wait();
+            });
+
+            host.Run();
+        }
     }
 }
