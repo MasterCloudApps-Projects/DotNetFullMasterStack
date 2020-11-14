@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using Esquio.AspNetCore.Endpoints.Metadata;
+using Esquio.Abstractions;
 
 namespace Ordering.API.Controllers
 {
@@ -16,11 +18,13 @@ namespace Ordering.API.Controllers
     {
         private readonly ILogger<OrderingController> logger;
         private readonly OrderingContext orderingContext;
+        private readonly IFeatureService featureService;
 
-        public OrderingController(OrderingContext orderingContext, ILogger<OrderingController> logger)
+        public OrderingController(OrderingContext orderingContext, ILogger<OrderingController> logger, IFeatureService featureService)
         {
             this.orderingContext = orderingContext;
             this.logger = logger;
+            this.featureService = featureService;
         }
 
         [HttpPost]
@@ -85,6 +89,34 @@ namespace Ordering.API.Controllers
                 return NotFound();
             }
             return Ok(order);
+        }
+
+        [HttpGet("getpromowinter")]
+        [FeatureFilter(Name = "OrderPromoWinter")]
+        public string GetPromoWinter()
+        {
+            //TODO: add database logic
+            string result = "WINTER-PROMO";
+    
+            return result ;
+        }
+
+
+        [HttpGet("promoorderfree")]
+        public async Task<bool> IsPromoOrderFree(int id)
+        {
+            bool result = await featureService.Do("OrderPromoFree",
+                 enabled: () =>
+                 {
+                     //TODO: UPDATE DATABASE ORDER
+                     return true;
+                 },
+                 disabled: () =>
+                 {
+                    return false;
+                 });
+
+            return result;
         }
     }
 }

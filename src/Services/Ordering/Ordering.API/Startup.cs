@@ -82,6 +82,17 @@ namespace Ordering.API
             services.AddSwaggerGen();
 
             services.AddCustomDbContext(Configuration);
+
+            services
+                .AddEsquio(setup =>
+                {
+                    setup.UseScopedEvaluation(useScopedEvaluation: true);
+                })
+                .AddAspNetCoreDefaultServices()
+                .AddApplicationInsightProcessor()
+                .AddConfigurationStore(Configuration);
+
+           
         }
     }
 }

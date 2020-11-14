@@ -1,12 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Esquio.Abstractions;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Moq;
 using Ordering.API.Controllers;
 using Ordering.API.Infrastructure;
 using Ordering.API.ViewModel;
+using Swashbuckle.SwaggerUi;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -17,6 +20,8 @@ namespace Ordering.UnitTest
         private readonly DbContextOptions<OrderingContext> dbContextOptions;
 
         private readonly ILogger<OrderingController> logger;
+
+        //private readonly IFeatureService featureService;
 
         public OrderingControllerTest()
         {
@@ -30,6 +35,7 @@ namespace Ordering.UnitTest
                 dbContext.SaveChanges();
             }
             logger = new Mock<ILogger<OrderingController>>().Object;
+            //
         }
 
         [Fact]
@@ -45,7 +51,7 @@ namespace Ordering.UnitTest
             var orderingContext = new OrderingContext(dbContextOptions);
 
             //Act
-            var orderingController = new OrderingController(orderingContext, logger);
+            var orderingController = new OrderingController(orderingContext, logger, null);
             var actionResult = await orderingController.GetOrdersAsync(pageSize, pageIndex);
 
             //Assert
@@ -55,6 +61,23 @@ namespace Ordering.UnitTest
             Assert.Equal(pageIndex, page.PageIndex);
             Assert.Equal(pageSize, page.PageSize);
             Assert.Equal(expectedItemsInPage, page.Data.Count());
+        }
+
+        [Fact] 
+        public void Get_Promo_Winter()
+        {
+            var expectedPromoWinter = "WINTER-PROMO";
+            Mock<IFeatureService> featureService = new Mock<IFeatureService>();
+            
+            featureService.Setup(x => x.IsEnabledAsync("IsEnabledAsync", It.IsAny<CancellationToken>())).Returns(Task.FromResult(true));
+
+            var orderingContext = new OrderingContext(dbContextOptions);
+
+            //Act
+            var orderingController = new OrderingController(orderingContext, logger, featureService.Object);
+            var actionResult = orderingController.GetPromoWinter();
+            Assert.Equal(expectedPromoWinter, actionResult);       
+
         }
 
         private List<API.Models.Order> GetFakeData()
