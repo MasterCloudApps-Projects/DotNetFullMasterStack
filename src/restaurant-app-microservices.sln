@@ -42,21 +42,25 @@ Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-co
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{FAB949E3-FE92-4AE7-9495-AB83CF74CB21}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kitchen.FunctionalTests", "Services\Kitchen\Kitchen.FunctionalTests\Kitchen.FunctionalTests.csproj", "{EBEB0F07-75A4-4015-B51A-C97B80BDA987}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kitchen.FunctionalTests", "Services\Kitchen\Kitchen.FunctionalTests\Kitchen.FunctionalTests.csproj", "{EBEB0F07-75A4-4015-B51A-C97B80BDA987}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kitchen.UnitTest", "Services\Kitchen\Kitchen.UnitTest\Kitchen.UnitTest.csproj", "{0A9F427E-AA43-4B5A-8E7B-B4D111EE5F15}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kitchen.UnitTest", "Services\Kitchen\Kitchen.UnitTest\Kitchen.UnitTest.csproj", "{0A9F427E-AA43-4B5A-8E7B-B4D111EE5F15}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{83C332A0-2566-4AC9-BDF7-BF4A052A23B0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{5B06D18E-E1A3-4E0F-B910-D7F394B63E2B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ordering.FunctionalTests", "Services\Ordering\Ordering.FunctionalTests\Ordering.FunctionalTests.csproj", "{BCC6FAEF-73CB-46F4-9352-1AD14DA04B22}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ordering.FunctionalTests", "Services\Ordering\Ordering.FunctionalTests\Ordering.FunctionalTests.csproj", "{BCC6FAEF-73CB-46F4-9352-1AD14DA04B22}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ordering.UnitTest", "Services\Ordering\Ordering.UnitTest\Ordering.UnitTest.csproj", "{2BD580D0-DD9A-431F-A7AD-1985F62D5270}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ordering.UnitTest", "Services\Ordering\Ordering.UnitTest\Ordering.UnitTest.csproj", "{2BD580D0-DD9A-431F-A7AD-1985F62D5270}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Restaurant.FunctionalTests", "Services\Restaurant\Restaurant.FunctionalTests\Restaurant.FunctionalTests.csproj", "{38563891-F577-4572-99E9-003B9D7D900E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Restaurant.FunctionalTests", "Services\Restaurant\Restaurant.FunctionalTests\Restaurant.FunctionalTests.csproj", "{38563891-F577-4572-99E9-003B9D7D900E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Restaurant.UnitTest", "Services\Restaurant\Restaurant.UnitTest\Restaurant.UnitTest.csproj", "{629810EF-3ECE-4F42-9608-93F220863575}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Restaurant.UnitTest", "Services\Restaurant\Restaurant.UnitTest\Restaurant.UnitTest.csproj", "{629810EF-3ECE-4F42-9608-93F220863575}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notifications", "Notifications", "{DB19FC1F-75BC-45C3-A5A9-EB80E861C34F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotificationFunctions", "Services\Notifications\NotificationFunctions\NotificationFunctions.csproj", "{21513F7E-C7F1-473F-A3C3-210F0D32E0AD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -120,6 +124,10 @@ Global
 		{629810EF-3ECE-4F42-9608-93F220863575}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{629810EF-3ECE-4F42-9608-93F220863575}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{629810EF-3ECE-4F42-9608-93F220863575}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21513F7E-C7F1-473F-A3C3-210F0D32E0AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21513F7E-C7F1-473F-A3C3-210F0D32E0AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21513F7E-C7F1-473F-A3C3-210F0D32E0AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21513F7E-C7F1-473F-A3C3-210F0D32E0AD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -148,6 +156,8 @@ Global
 		{2BD580D0-DD9A-431F-A7AD-1985F62D5270} = {83C332A0-2566-4AC9-BDF7-BF4A052A23B0}
 		{38563891-F577-4572-99E9-003B9D7D900E} = {5B06D18E-E1A3-4E0F-B910-D7F394B63E2B}
 		{629810EF-3ECE-4F42-9608-93F220863575} = {5B06D18E-E1A3-4E0F-B910-D7F394B63E2B}
+		{DB19FC1F-75BC-45C3-A5A9-EB80E861C34F} = {25AA4DE6-F28D-458B-BBBA-F21AE6C2C2A8}
+		{21513F7E-C7F1-473F-A3C3-210F0D32E0AD} = {DB19FC1F-75BC-45C3-A5A9-EB80E861C34F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0E5CF642-1F93-4917-BB9A-655FFEC4E58E}
