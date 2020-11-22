@@ -53,7 +53,7 @@ namespace Restaurant.API
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection(); 
+             
             
             app.UseDiscoveryClient();
 

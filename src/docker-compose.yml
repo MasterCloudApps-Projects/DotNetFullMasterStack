@@ -1,8 +1,12 @@
 version: '3.4'
 
 services:
-  configserver:
-    image: "steeltoeoss/config-server:latest"
+  config-service:
+    #image: "steeltoeoss/config-server:latest"
+    image: ${REGISTRY:-dotnetfullmasterstack}/config-service:${PLATFORM:-linux}-${TAG:-latest}
+    build:
+      context: ./SpringCloud/config-service/
+      dockerfile: Dockerfile   
     command: --spring.profiles.active=native --spring.cloud.config.server.native.searchLocations=/config
     volumes:
       - type: bind
@@ -10,18 +14,35 @@ services:
         target: /config
     ports:
       - "8888:8888"
-  eurekaserver:
-    image: "steeltoeoss/eurekaserver:latest"
+  eureka-service:
+    image: ${REGISTRY:-dotnetfullmasterstack}/eureka-service:${PLATFORM:-linux}-${TAG:-latest}
+    build:
+      context: ./SpringCloud/eureka-service/
+      dockerfile: Dockerfile    
     ports:
       - "8761:8761"
-  spring-boot-admin:
-     environment:
-       - EUREKA_SERVICE_URL=http://eurekaserver:8761
-     image: "slydeveloper/spring-boot-admin"
-     ports:
+  admin-service:
+    image: ${REGISTRY:-dotnetfullmasterstack}/admin-service:${PLATFORM:-linux}-${TAG:-latest}
+    build:
+      context: ./SpringCloud/admin-service/
+      dockerfile: Dockerfile  
+    environment:
+        - EUREKA_SERVICE_URL=http://eureka-service:8761
+    ports:
        - "8889:8889"
+    depends_on:
+       - eureka-service
+  gateway-service:
+     environment:
+       - EUREKA_SERVICE_URL=http://eureka-service:8761
+     image: ${REGISTRY:-dotnetfullmasterstack}/gateway-service:${PLATFORM:-linux}-${TAG:-latest}
+     build:
+      context: ./SpringCloud/gateway-service/
+      dockerfile: Dockerfile  
+     ports:
+       - "8181:8181"
      depends_on:
-       - eurekaserver
+       - eureka-service
   sqlserver:
     image: mcr.microsoft.com/mssql/server:2017-latest
 

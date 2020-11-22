@@ -1,6 +1,22 @@
 version: '3.4'
 
 services:
+  config-service-test:
+    entrypoint:
+        - mvn
+        - test
+  eureka-service-test:
+    entrypoint:
+        - mvn
+        - test
+  admin-service-test:
+    entrypoint:
+        - mvn
+        - test  
+  gateway-service-test:
+    entrypoint:
+        - mvn
+        - test
   customer-api-test:
     entrypoint:
         - dotnet

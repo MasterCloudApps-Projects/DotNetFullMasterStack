@@ -54,7 +54,7 @@ namespace Kitchen.API
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
+            
 
             app.UseDiscoveryClient();
 

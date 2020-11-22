@@ -9,16 +9,7 @@ using Microsoft.Extensions.Hosting;
 using Steeltoe.Discovery.Client;
 using System;
 using System.Reflection;
-using Steeltoe.Management.Endpoint.Health;
-
-
-using Steeltoe.Management.Endpoint;
 using Steeltoe.Management.Tracing;
-using Steeltoe.Management.Endpoint.Hypermedia;
-using Steeltoe.Management.Endpoint.Loggers;
-using Steeltoe.Management.Endpoint.Metrics;
-using Steeltoe.Management.Endpoint.Info;
-using Steeltoe.Management.Endpoint.Env;
 
 namespace Customer.API
 {
@@ -64,7 +55,6 @@ namespace Customer.API
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
 
             app.UseDiscoveryClient();
             //app.UseHealthActuator();

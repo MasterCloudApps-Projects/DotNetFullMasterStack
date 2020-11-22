@@ -53,7 +53,7 @@ namespace Ordering.API
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
+            
 
             app.UseDiscoveryClient();
 
