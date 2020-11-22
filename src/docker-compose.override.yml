@@ -12,6 +12,9 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=https://+:443;http://+:80
       - ConnectionString=${RESTAURANT_DATABASE_SERVER:-Server=sqlserver;Database=restaurant.Services.Customer;User Id=sa;Password=Pass@word} 
+      - spring__cloud__config__uri=http://configserver:8888
+      - eureka__instance__hostName=customer-api
+      - eureka__instance__port=80
     ports:
       - "80"
       - "443"
@@ -23,6 +26,9 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=https://+:443;http://+:80
       - ConnectionString=${RESTAURANT_DATABASE_SERVER:-Server=sqlserver;Database=restaurant.Services.Kitchen;User Id=sa;Password=Pass@word} 
+      - spring__cloud__config__uri=http://configserver:8888
+      - eureka__instance__hostName=kitchen-api
+      - eureka__instance__port=80
     ports:
       - "80"
       - "443"
@@ -34,6 +40,9 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=https://+:443;http://+:80
       - ConnectionString=${RESTAURANT_DATABASE_SERVER:-Server=sqlserver;Database=restaurant.Services.Ordering;User Id=sa;Password=Pass@word} 
+      - spring__cloud__config__uri=http://configserver:8888
+      - eureka__instance__hostName=ordering-api
+      - eureka__instance__port=80
     ports:
       - "80"
       - "443"
@@ -45,6 +54,9 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=https://+:443;http://+:80
       - ConnectionString=${RESTAURANT_DATABASE_SERVER:-Server=sqlserver;Database=restaurant.Services.Restaurant;User Id=sa;Password=Pass@word} 
+      - spring__cloud__config__uri=http://configserver:8888
+      - eureka__instance__hostName=restaurant-api
+      - eureka__instance__port=80
     ports:
       - "80"
       - "443"

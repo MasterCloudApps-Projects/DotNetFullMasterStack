@@ -26,6 +26,17 @@
     <PackageReference Include="Swashbuckle" Version="5.6.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
     <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="5.6.3" />
+    <PackageReference Include="Steeltoe.Discovery.ClientCore" Version="3.0.0" />
+    <PackageReference Include="Steeltoe.Discovery.Eureka" Version="3.0.0" />
+    <PackageReference Include="Steeltoe.Extensions.Configuration.CloudFoundryBase" Version="3.0.0" />
+    <PackageReference Include="Steeltoe.Extensions.Logging.DynamicLogger" Version="3.0.0" />
+    <PackageReference Include="Steeltoe.Management.CloudFoundryCore" Version="3.0.0" />
+    <PackageReference Include="Steeltoe.Management.Diagnostics" Version="3.0.0" />
+    <PackageReference Include="Steeltoe.Management.EndpointBase" Version="3.0.0" />
+    <PackageReference Include="Steeltoe.Management.EndpointCore" Version="3.0.0" />
+    <PackageReference Include="Steeltoe.Management.TracingCore" Version="3.0.0" />
+    <PackageReference Include="Steeltoe.Extensions.Configuration.PlaceholderCore" Version="3.0.0" />
+
   </ItemGroup>
 
   <ItemGroup>

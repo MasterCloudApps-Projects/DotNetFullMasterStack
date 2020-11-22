@@ -1,0 +1,30 @@
+AppSettings:
+  SiteTitle: Music Store
+  CacheDbResults: true
+Logging:
+  LogLevel:
+    Default: Information
+    System: Warning
+    Microsoft: Warning
+    Steeltoe: Information
+eureka:
+  client:
+    serviceUrl: http://eurekaserver:8761/eureka/
+  instance:
+    StatusPageUrlPath: /actuator/info
+    HealthCheckUrlPath: /actuator/health
+mysql:
+  client:
+    server: mysql
+    username: root
+    password: steeltoe
+sqlserver:
+  credentials:
+    server: sqlserver
+    username: sa
+    password: SteeltoeR0cks
+management:
+  endpoints:
+    actuator:
+      exposure:
+        include: [ "*" ]

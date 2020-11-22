@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.DependencyInjection;
+using Steeltoe.Management.Endpoint;
 
 namespace Customer.API
 {
@@ -29,6 +30,7 @@ namespace Customer.API
         public static IWebHost CreateHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
+                .AddAllActuators()
                 .Build();
     }
 }

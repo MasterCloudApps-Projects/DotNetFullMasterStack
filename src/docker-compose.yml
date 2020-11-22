@@ -1,6 +1,27 @@
 version: '3.4'
 
 services:
+  configserver:
+    image: "steeltoeoss/config-server:latest"
+    command: --spring.profiles.active=native --spring.cloud.config.server.native.searchLocations=/config
+    volumes:
+      - type: bind
+        source: ./config-server
+        target: /config
+    ports:
+      - "8888:8888"
+  eurekaserver:
+    image: "steeltoeoss/eurekaserver:latest"
+    ports:
+      - "8761:8761"
+  spring-boot-admin:
+     environment:
+       - EUREKA_SERVICE_URL=http://eurekaserver:8761
+     image: "slydeveloper/spring-boot-admin"
+     ports:
+       - "8889:8889"
+     depends_on:
+       - eurekaserver
   sqlserver:
     image: mcr.microsoft.com/mssql/server:2017-latest
 

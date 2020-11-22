@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Ordering.API.Infrastructure;
+using Steeltoe.Discovery.Client;
 using System;
 using System.Reflection;
 
@@ -54,6 +55,8 @@ namespace Ordering.API
 
             app.UseHttpsRedirection();
 
+            app.UseDiscoveryClient();
+
             app.UseRouting();
 
             // Enable middleware to serve generated Swagger as a JSON endpoint.
@@ -77,6 +80,12 @@ namespace Ordering.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDiscoveryClient();
+            services.AddHealthChecks();
+
+
+            services.AddControllers();
+
             services.AddControllers();
 
             services.AddSwaggerGen();

@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Restaurant.API.Infrastructure;
+using Steeltoe.Discovery.Client;
 using System;
 using System.Reflection;
 
@@ -52,7 +53,9 @@ namespace Restaurant.API
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
+            app.UseHttpsRedirection(); 
+            
+            app.UseDiscoveryClient();
 
             app.UseRouting();
 
@@ -77,6 +80,10 @@ namespace Restaurant.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDiscoveryClient();
+            services.AddHealthChecks();
+
+
             services.AddControllers();
 
             services.AddSwaggerGen();

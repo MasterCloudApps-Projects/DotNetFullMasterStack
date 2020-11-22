@@ -42,21 +42,26 @@ Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-co
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{FAB949E3-FE92-4AE7-9495-AB83CF74CB21}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kitchen.FunctionalTests", "Services\Kitchen\Kitchen.FunctionalTests\Kitchen.FunctionalTests.csproj", "{EBEB0F07-75A4-4015-B51A-C97B80BDA987}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kitchen.FunctionalTests", "Services\Kitchen\Kitchen.FunctionalTests\Kitchen.FunctionalTests.csproj", "{EBEB0F07-75A4-4015-B51A-C97B80BDA987}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kitchen.UnitTest", "Services\Kitchen\Kitchen.UnitTest\Kitchen.UnitTest.csproj", "{0A9F427E-AA43-4B5A-8E7B-B4D111EE5F15}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kitchen.UnitTest", "Services\Kitchen\Kitchen.UnitTest\Kitchen.UnitTest.csproj", "{0A9F427E-AA43-4B5A-8E7B-B4D111EE5F15}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{83C332A0-2566-4AC9-BDF7-BF4A052A23B0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{5B06D18E-E1A3-4E0F-B910-D7F394B63E2B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ordering.FunctionalTests", "Services\Ordering\Ordering.FunctionalTests\Ordering.FunctionalTests.csproj", "{BCC6FAEF-73CB-46F4-9352-1AD14DA04B22}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ordering.FunctionalTests", "Services\Ordering\Ordering.FunctionalTests\Ordering.FunctionalTests.csproj", "{BCC6FAEF-73CB-46F4-9352-1AD14DA04B22}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ordering.UnitTest", "Services\Ordering\Ordering.UnitTest\Ordering.UnitTest.csproj", "{2BD580D0-DD9A-431F-A7AD-1985F62D5270}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ordering.UnitTest", "Services\Ordering\Ordering.UnitTest\Ordering.UnitTest.csproj", "{2BD580D0-DD9A-431F-A7AD-1985F62D5270}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Restaurant.FunctionalTests", "Services\Restaurant\Restaurant.FunctionalTests\Restaurant.FunctionalTests.csproj", "{38563891-F577-4572-99E9-003B9D7D900E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Restaurant.FunctionalTests", "Services\Restaurant\Restaurant.FunctionalTests\Restaurant.FunctionalTests.csproj", "{38563891-F577-4572-99E9-003B9D7D900E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Restaurant.UnitTest", "Services\Restaurant\Restaurant.UnitTest\Restaurant.UnitTest.csproj", "{629810EF-3ECE-4F42-9608-93F220863575}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Restaurant.UnitTest", "Services\Restaurant\Restaurant.UnitTest\Restaurant.UnitTest.csproj", "{629810EF-3ECE-4F42-9608-93F220863575}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "config-server", "config-server", "{573DD817-6911-4B7A-9FF3-E1533067B0A5}"
+	ProjectSection(SolutionItems) = preProject
+		config-server\application.yml = config-server\application.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -148,6 +153,7 @@ Global
 		{2BD580D0-DD9A-431F-A7AD-1985F62D5270} = {83C332A0-2566-4AC9-BDF7-BF4A052A23B0}
 		{38563891-F577-4572-99E9-003B9D7D900E} = {5B06D18E-E1A3-4E0F-B910-D7F394B63E2B}
 		{629810EF-3ECE-4F42-9608-93F220863575} = {5B06D18E-E1A3-4E0F-B910-D7F394B63E2B}
+		{573DD817-6911-4B7A-9FF3-E1533067B0A5} = {B944A01B-E84D-484E-96A2-29FA329EED2D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0E5CF642-1F93-4917-BB9A-655FFEC4E58E}
