@@ -6,8 +6,10 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Steeltoe.Discovery.Client;
 using System;
 using System.Reflection;
+using Steeltoe.Management.Tracing;
 
 namespace Customer.API
 {
@@ -35,6 +37,7 @@ namespace Customer.API
         }
     }
 
+
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -52,11 +55,21 @@ namespace Customer.API
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
+
+            app.UseDiscoveryClient();
+            //app.UseHealthActuator();
+            //app.UseInfoActuator();
+            //app.UseLoggersActuator();
+            //app.UseTraceActuator();
+            //app.UseRefreshActuator();
+            //app.UseEnvActuator();
+            //app.UseMappingsActuator();
+            //app.UseMetricsActuator();
+            //app.UseCloudFoundryActuators();
 
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
-
+            
             // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
             // specifying the Swagger JSON endpoint.
             app.UseSwaggerUI(c =>
@@ -67,6 +80,8 @@ namespace Customer.API
             app.UseRouting();
 
             app.UseAuthorization();
+
+
 
             app.UseEndpoints(endpoints =>
             {
@@ -79,9 +94,25 @@ namespace Customer.API
         {
             services.AddControllers();
 
+            services.AddDiscoveryClient();
+            services.AddHealthChecks();
+            // Add distributed tracing
+            services.AddDistributedTracing(Configuration);
+
+            // Add actuators
+            //services.AddHealthActuator();
+            //services.AddHypermediaActuator();
+            //services.AddLoggersActuator();
+            //services.AddMetricsActuator();
+            //services.AddInfoActuator();
+            //services.AddEnvActuator();
+
+
             services.AddSwaggerGen();
 
-            services.AddCustomDbContext(Configuration);
+            //services.AddCustomDbContext(Configuration);
+
+            services.AddDbContext<CustomerContext>(options => options.UseInMemoryDatabase(databaseName: "kk"));
         }
     }
 }

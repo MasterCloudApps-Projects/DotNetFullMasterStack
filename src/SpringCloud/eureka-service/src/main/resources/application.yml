@@ -1,0 +1,23 @@
+
+spring:
+  application:
+    name: eureka-service
+  boot:
+    admin:
+      monitor:
+        status-interval: 5000
+      routes:
+        endpoints: '[env,metrics,info,trace,refresh,loggers,hystrix.stream]'
+      ui:
+        title: 'DotNetFullMasterStack:· Springboot eureka service!!"'
+server:
+  port: 8761
+eureka:
+  server:
+    enable-self-preservation: false
+    eviction-interval-timer-in-ms: 5000
+  instance:
+    hostname: localhost
+  client:
+    register-with-eureka: false
+    fetch-registry: false

@@ -1,0 +1,20 @@
+AppSettings:
+  SiteTitle: DotNetFullMasterStack
+  CacheDbResults: true
+Logging:
+  LogLevel:
+    Default: Information
+    System: Warning
+    Microsoft: Warning
+    Steeltoe: Information
+eureka:
+  client:
+    serviceUrl: http://eureka-service:8761/eureka/
+  instance:
+    StatusPageUrlPath: /actuator/info
+    HealthCheckUrlPath: /actuator/health
+management:
+  endpoints:
+    actuator:
+      exposure:
+        include: [ "*" ]

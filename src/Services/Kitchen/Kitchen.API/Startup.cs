@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Steeltoe.Discovery.Client;
+using Steeltoe.Discovery.Eureka;
 using System;
 using System.Reflection;
 
@@ -52,8 +54,11 @@ namespace Kitchen.API
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
             
+
+            app.UseDiscoveryClient();
+
+
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
 
@@ -72,16 +77,25 @@ namespace Kitchen.API
             {
                 endpoints.MapControllers();
             });
+
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDiscoveryClient();
+            services.AddHealthChecks();
+
+
+            services.AddControllers();
+
             services.AddControllers();
 
             services.AddSwaggerGen();
 
-            services.AddCustomDbContext(Configuration);
+            //services.AddCustomDbContext(Configuration);
+            services.AddDbContext<KitchenContext>(options => options.UseInMemoryDatabase(databaseName: "kitchen-api"));
+
 
         }
     }

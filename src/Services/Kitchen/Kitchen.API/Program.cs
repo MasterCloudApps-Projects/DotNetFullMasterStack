@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Steeltoe.Management.Endpoint;
 
 namespace Kitchen.API
 {
@@ -12,6 +13,7 @@ namespace Kitchen.API
         public static IWebHost CreateHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
+                .AddAllActuators()
                 .Build();
 
         public static void Main(string[] args)
