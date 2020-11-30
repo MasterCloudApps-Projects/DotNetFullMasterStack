@@ -1,0 +1,42 @@
+﻿
+@page "/fetchdata"
+
+@inject MyBlazorUI.Services.ICustomerService kitchenService
+
+<h1>Customer list</h1>
+
+<p>This component demonstrates fetching data from a service.</p>
+
+@if (customers == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Surname</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var customer in customers.Data)
+            {
+                <tr>
+                    <td>@customer.Name</td>
+                    <td>@customer.Surname</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private MyBlazorUI.Models.PaginatedItemsViewModel<MyBlazorUI.Models.Customer> customers;
+
+    protected override async Task OnInitializedAsync()
+    {
+        customers = await kitchenService.GetTicketsAsync();
+    }
+}
