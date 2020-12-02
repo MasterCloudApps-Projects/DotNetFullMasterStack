@@ -57,3 +57,13 @@ services:
         - /p:CollectCoverage=true 
         - /p:CoverletOutputFormat=cobertura
         - /p:CoverletOutput=/tests/
+  ui-aspnet-blazor-test:
+    entrypoint:
+        - dotnet
+        - test
+        - --logger
+        - trx;LogFileName=/tests/customer-api-test-results.xml
+        - --collect:"XPlat Code Coverage"
+        - /p:CollectCoverage=true 
+        - /p:CoverletOutputFormat=cobertura
+        - /p:CoverletOutput=/tests

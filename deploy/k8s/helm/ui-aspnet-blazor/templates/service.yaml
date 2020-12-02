@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "ui-aspnet-blazor.name" . }}
+  labels:
+    {{- include "ui-aspnet-blazor.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "ui-aspnet-blazor.selectorLabels" . | nindent 4 }}
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: {{ include "ui-aspnet-blazor.name" . }}
+  annotations:
+    kubernetes.io/ingress.class: addon-http-application-routing
+spec:
+  rules:
+  - host: {{ include "ui-aspnet-blazor.name" . }}.{{ .Values.application.domain }}
+    http:
+      paths:
+      - backend:
+          serviceName: {{ include "ui-aspnet-blazor.name" . }}
+          servicePort: {{ .Values.service.port }}
+        path: /

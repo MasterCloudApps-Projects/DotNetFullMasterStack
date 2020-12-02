@@ -13,6 +13,9 @@ COPY . .
 WORKDIR "/src/UI/MyBlazorUI"
 RUN dotnet build "MyBlazorUI.csproj" -c Release -o /app/build
 
+FROM build as unittest
+WORKDIR /src
+
 FROM build AS publish
 RUN dotnet publish "MyBlazorUI.csproj" -c Release -o /app/publish
 

@@ -7,7 +7,7 @@ parameters:
 jobs:
 - job: manifest
   #condition: and(succeeded(),ne('${{ variables['Build.Reason'] }}', 'PullRequest'))
-  condition: False
+  condition: True
   dependsOn:
     # - BuildWindows
     - BuildLinux  
@@ -27,8 +27,6 @@ jobs:
       mkdir -p ~/.docker
       sed '$ s/.$//' $DOCKER_CONFIG/config.json > ~/.docker/config.json
       echo ',"experimental": "enabled" }' >> ~/.docker/config.json
-      docker --config ~/.docker manifest create ${{ parameters.registry }}/${{ parameters.image }}:${{ parameters.branch }} ${{ parameters.registry }}/${{ parameters.image }}:linux-${{ parameters.branch }}
-      docker --config ~/.docker manifest create ${{ parameters.registry }}/${{ parameters.image }}:latest ${{ parameters.registry }}/${{ parameters.image }}:linux-latest
-      docker --config ~/.docker manifest push ${{ parameters.registry }}/${{ parameters.image }}:${{ parameters.branch }}
-      docker --config ~/.docker manifest push ${{ parameters.registry }}/${{ parameters.image }}:latest
+      docker --config ~/.docker push ${{ parameters.registry }}/${{ parameters.image }}:${{ parameters.branch }}
+      docker --config ~/.docker push ${{ parameters.registry }}/${{ parameters.image }}:latest
     displayName: Create multiarch manifest
