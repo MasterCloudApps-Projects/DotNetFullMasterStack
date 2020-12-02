@@ -66,7 +66,14 @@ services:
       - eureka__client__serviceurl=http://eureka-service:8761/eureka/
     ports:
       - "48001:48001"
-
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+  ui-aspnet-blazor:
+    environment:
+      - eureka__client__serviceurl=http://eureka-service:8761/eureka/
+      - ASPNETCORE_ENVIRONMENT=Development
+      - GATEWAY_URL=http://gateway-service:8181/
+      - CUSTOMER_SERVICE_URL=customer-api/api/v1/Customer/
+    ports:
+      - "8080:80"     
