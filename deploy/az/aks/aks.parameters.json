@@ -1,0 +1,45 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "resourceName": {
+            "value": "DotNetFullMasterStack"
+        },
+        "location": {
+            "value": "westeurope"
+        },
+        "dnsPrefix": {
+            "value": "DotNetFullMasterStack-dns"
+        },
+        "kubernetesVersion": {
+            "value": "1.18.10"
+        },
+        "networkPlugin": {
+            "value": "kubenet"
+        },
+        "enableRBAC": {
+            "value": true
+        },
+        "enablePrivateCluster": {
+            "value": false
+        },
+        "enableHttpApplicationRouting": {
+            "value": true
+        },
+        "enableAzurePolicy": {
+            "value": false
+        },
+        "vmssNodePool": {
+            "value": true
+        },
+        "workspaceName": {
+            "value": "DefaultWorkspace-5935a68a-2476-4a58-bd81-a11d0ee06465-WUS"
+        },
+        "omsWorkspaceId": {
+            "value": "/subscriptions/5935a68a-2476-4a58-bd81-a11d0ee06465/resourcegroups/defaultresourcegroup-wus/providers/microsoft.operationalinsights/workspaces/defaultworkspace-5935a68a-2476-4a58-bd81-a11d0ee06465-wus"
+        },
+        "workspaceRegion": {
+            "value": "westus"
+        }
+    }
+}
