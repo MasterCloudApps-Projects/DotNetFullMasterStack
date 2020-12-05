@@ -19,6 +19,8 @@ jobs:
     registryEndpoint: $(registryEndpoint)
     helmfrom: $(Build.SourcesDirectory)/deploy/k8s/helm
     helmto: $(Build.ArtifactStagingDirectory)/deploy/k8s/helm
+    acifrom: $(Build.SourcesDirectory)/deploy/az/
+    acito: $(Build.ArtifactStagingDirectory)/deploy/az/
 - template: ../build-docker.yaml
   parameters:
     image: customer.api
