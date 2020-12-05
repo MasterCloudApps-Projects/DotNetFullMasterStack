@@ -6,6 +6,7 @@
             "type": "string"
         },
         "containerName": {
+            
             "type": "string"
         },
         "imageType": {

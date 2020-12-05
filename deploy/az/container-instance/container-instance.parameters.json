@@ -43,9 +43,6 @@
                     "protocol": "TCP"
                 }
             ]
-        },
-        "dnsNameLabel": {
-            "value": "dotnetfullmasterstack-customer-api"
         }
     }
 }
