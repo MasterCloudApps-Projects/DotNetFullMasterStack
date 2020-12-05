@@ -7,7 +7,7 @@ parameters:
 jobs:
 - job: manifest
   #condition: and(succeeded(),ne('${{ variables['Build.Reason'] }}', 'PullRequest'))
-  condition: True
+  condition: False
   dependsOn:
     # - BuildWindows
     - BuildLinux  

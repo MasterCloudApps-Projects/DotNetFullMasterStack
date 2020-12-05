@@ -87,16 +87,6 @@ jobs:
     inputs:
       pathtoPublish: ${{ parameters.helmto }}
       artifactName: helm
-  - task: CopyFiles@2
-    displayName: Copy aci files
-    inputs:
-      sourceFolder: ${{ parameters.acifrom }}
-      targetFolder: ${{ parameters.acito}}
-  - task: PublishBuildArtifacts@1
-    displayName: Publish aci files
-    inputs:
-      pathtoPublish: ${{ parameters.acito }}
-      artifactName: aci
 - job: BuildWindows
   condition: False
   # condition: ne('${{ variables['Build.Reason'] }}', 'PullRequest')
