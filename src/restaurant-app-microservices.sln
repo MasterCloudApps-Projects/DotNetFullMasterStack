@@ -65,11 +65,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "config-server", "config-ser
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{BD20D7C5-569F-4C18-8275-B448CA41B28F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyBlazorUI", "UI\MyBlazorUI\MyBlazorUI.csproj", "{49B53C0F-A51D-4690-854F-63F4A634BC0B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyBlazorUI", "UI\MyBlazorUI\MyBlazorUI.csproj", "{49B53C0F-A51D-4690-854F-63F4A634BC0B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notifications", "Notifications", "{DB19FC1F-75BC-45C3-A5A9-EB80E861C34F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotificationFunctions", "Services\Notifications\NotificationFunctions\NotificationFunctions.csproj", "{21513F7E-C7F1-473F-A3C3-210F0D32E0AD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NotificationFunctions", "Services\Notifications\NotificationFunctions\NotificationFunctions.csproj", "{21513F7E-C7F1-473F-A3C3-210F0D32E0AD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -137,6 +137,10 @@ Global
 		{49B53C0F-A51D-4690-854F-63F4A634BC0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{49B53C0F-A51D-4690-854F-63F4A634BC0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{49B53C0F-A51D-4690-854F-63F4A634BC0B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21513F7E-C7F1-473F-A3C3-210F0D32E0AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21513F7E-C7F1-473F-A3C3-210F0D32E0AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21513F7E-C7F1-473F-A3C3-210F0D32E0AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21513F7E-C7F1-473F-A3C3-210F0D32E0AD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
