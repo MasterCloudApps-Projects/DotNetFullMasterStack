@@ -26,6 +26,8 @@ Se han desarrollado cuatro microservicios: customer, kitchen, ordering y restaur
 
 Los micros se han integrado con el stack [Spring Cloud Netflix](https://spring.io/projects/spring-cloud-netflix) haciendo uso de la libreria [Steeltoe](https://steeltoe.io/), por último se ha desarrollado una aplicación web basada en [blazor](https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor)  
 
+![Diagram](./docs/imgs/diagram.png)
+
 Para el desarrollo y depuración de la aplicación se ha utilizado vistual studio, también existe la posibilidad de ejecutar los proyectos desde línea de comandos.
 
 Para ejecutar el microservicio Customer.API desde la línea de comandos API (desde src):
