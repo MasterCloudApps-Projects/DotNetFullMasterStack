@@ -2,7 +2,6 @@
 Param(
     [parameter(Mandatory=$false)][string]$appName="dotnetfullmasterstack",
     [parameter(Mandatory=$false)][string]$domain="d7fc52a6d2b948eaa635.westeurope.aksapp.io",
-
     [parameter(Mandatory=$false)][bool]$debughelm=$false
     )
 
