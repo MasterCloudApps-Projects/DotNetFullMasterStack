@@ -1,5 +1,5 @@
 # DotNetFullMasterStack
-El máster tiene como objetivo el adquirir conocimientos que permitan desarrollar y desplegar aplicaciones de internet utilizando las últimas tendencias del sector. 
+El [máster Cloud Apps](https://www.codeurjc.es/mastercloudapps/) tiene como objetivo el adquirir conocimientos que permitan desarrollar y desplegar aplicaciones de internet utilizando las últimas tendencias del sector. 
 
 - [Introducción](#introducción)
 - [Herramientas necesarias](#herramientas-necesarias)
@@ -15,8 +15,7 @@ El máster tiene como objetivo el adquirir conocimientos que permitan desarrolla
 - [Tye](#tye)
 - [Container instances (ACI)](#container-instances--aci-)
 - [AKS](#aks)
-- [Bridge to kubernetes](#bridge-to-kubernetes)
-- [Integración y despliegue continuo](#integraci-n-y-despliegue-continuo)
+- [Integración y despliegue continuo](#integración-y-despliegue-continuo)
 
 # Introducción
 En el recorrido del master se han utilizado tecnologías como java, node, AWS,…. El objetivo trabajo fin de máster es el analizar e implementar varias partes del master con tecnologías .net y afines.
@@ -81,9 +80,8 @@ La librería [esquio](https://github.com/Xabaril/Esquio) Ha sido desarrollada po
 [Azure resource manager (ARM)](https://docs.microsoft.com/en-us/azure/azure-resource-manager/) es la solución utilizada por Microsoft para implementar infraestructura como código para las soluciones que utilizan la plataforma Azure. Una plantilla ARM es un JSON (javascript object anotation) que define la infraestructura y configuración necesitaría para crear la infraestructura necesaria para ejecutar una o varias aplicaciones. 
 
 # Azure functions
-[Azure functions](https://azure.microsoft.com/en-us/services/functions) permite ejecutar código .net, node, java, power shell o phyton a partir de un evento: Blob storage, Azure cosmos DB, Http, RabbitMQ o Azure queue storage. Más información, [aqui](./docs/azure-functions.md#azure-functions)
+[Azure functions](https://azure.microsoft.com/en-us/services/functions) permite ejecutar código .net, node, java, power shell o phyton a partir de un evento: Blob storage, Azure cosmos DB, Http, RabbitMQ o Azure queue storage sin necesidad de tener un servidor. Más información, [aqui](./docs/azure-functions.md#azure-functions)
 
-Con Azure Functions podemos cubrir diferentes escenarios tales como procesar archivos cuando se almacenan, ejecutar tareas programadas, analizar datos o procesar información sin necesidad de tener un proceso arrancado consumiendo diferentes recursos.
 # Microservicios
 A día de hoy una de las arquitecturas más utilizadas a la hora de desarrollar aplicaciones en la nube es la arquitectura de microservicios. Se puede definir un microservicio  como un servicio pequeño y autónomo que interactúa  con otros microservicios. 
 Uno de los primeros stack de microservicios fue el stack de Netflix y fue adotado por Spring bajo el nombre [spring-cloud-netflix](https://spring.io/projects/spring-cloud-netflix). Está compuesto por los siguientes elementos:
@@ -94,7 +92,7 @@ Uno de los primeros stack de microservicios fue el stack de Netflix y fue adotad
   
 [Steeltoe](https://steeltoe.io/) ofrece una serie de librerías cuyo objetivo es integrarse con los servicios Spring Cloud necesarios en una arquitectura de microservicios
 # Tye
-Es un proyecto de código abierto y experimental, el objetivo de esta herramienta es el facilitar el desarrollo, testeo y despliegue de microservicios y aplicaciones distribuidas basadas en NetCore. Más información, [aqui](./docs/type.md#Tye)
+[Type](https://github.com/dotnet/tye) es un proyecto de código abierto y experimental, el objetivo de esta herramienta es el facilitar el desarrollo, testeo y despliegue de microservicios y aplicaciones distribuidas basadas en NetCore. Más información, [aqui](./docs/type.md#Tye)
 
 # Container instances (ACI)
 [Azure container instances](https://azure.microsoft.com/en-us/services/container-instances/) puede arrancar un contenedor en cuestión de segundos utilizando imágenes Linux o Windows desde docker hub o desde un registro de contenedores privado. El acceso a los contenedores puede realizarse a través de una dirección IP o un nombre de dominio, también se puede acceder a la consola del contenedor a fin de revisar o solucionar problemas durante el desarrollo. Más información, [aqui](./docs/aci.md#ACI)
@@ -102,11 +100,8 @@ Es un proyecto de código abierto y experimental, el objetivo de esta herramient
 # AKS
 [Azure Kubernetes Service (AKS)](https://docs.microsoft.com/en-us/azure/aks/) facilita el despliegue de un clúster kubernetes como servicio en la nube de Azure reduciendo la complejidad de su administración y facilitando las tareas de mantenimiento.  Más información, [aqui](./docs/aks.md#AKS)
 
-
-# Bridge to kubernetes
-[Bridge to kubernetes](https://github.com/microsoft/vscode-docs/blob/master/docs/containers/bridge-to-kubernetes.md) Permite redirigir tráfico desde el clúster de kubernetes donde está desplegada nuestra aplicación hasta la máquina del desarrollador, de esta manera podemos desarrollar y depurar un servicio localmente mientras interactúa con el resto de servicios desplegados en el clúster. 
-
 # Integración y despliegue continuo
+[Azure pipelines](https://azure.microsoft.com/en-us/services/devops/pipelines/) es el servicio cloud que compila, prueba y despliega de manera automática cualquier tipo de aplicación desarrollada en cualquier lenguaje. La definición de una pipeline se realiza en sintaxis yaml y esta versionada junto con el código fuente de la aplicación. https://dev.azure.com/fjvelaaylon/DotNetFullMasterStack
 
 
 ##  Build Status
