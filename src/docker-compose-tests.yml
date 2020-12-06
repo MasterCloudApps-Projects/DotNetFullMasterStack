@@ -69,3 +69,8 @@ services:
       target: unittest
     volumes:
       - ${BUILD_ARTIFACTSTAGINGDIRECTORY:-./tests-results/}:/tests
+  ui-aspnet-blazor-test:
+    image: ${REGISTRY:-dotnetfullmasterstack}/ui-aspnet-blazor:${PLATFORM:-linux}-${TAG:-latest}
+    build:
+      context: .
+      dockerfile: UI/MyBlazorUI/Dockerfile

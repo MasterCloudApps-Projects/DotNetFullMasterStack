@@ -1,0 +1,33 @@
+variables:
+    registryEndpoint: dotnetfullmasterstack
+trigger:
+  branches:
+    include:
+    - master
+  paths:
+    include:
+    - build/azure-devops/buildimages.yml
+    - build/azure-devops/multiarch.yml
+    - build/azure-devops/infrastructure/*
+    - deploy/az/*
+    - deploy/k8s/*
+steps:
+- task: CopyFiles@2
+  displayName: Copy helm files
+  inputs:
+    sourceFolder: $(Build.SourcesDirectory)/deploy/k8s/helm
+    targetFolder: $(Build.ArtifactStagingDirectory)/deploy/k8s/helm
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathtoPublish: $(Build.ArtifactStagingDirectory)/deploy/k8s/helm
+    artifactName: helm    
+- task: CopyFiles@2
+  displayName: Copy infra
+  inputs:
+    sourceFolder: $(Build.SourcesDirectory)/deploy/az
+    targetFolder: $(Build.ArtifactStagingDirectory)/deploy/az
+- task: PublishBuildArtifacts@1
+  displayName: Publish infra files
+  inputs:
+    pathtoPublish:  $(Build.ArtifactStagingDirectory)/deploy/az
+    artifactName: infra
