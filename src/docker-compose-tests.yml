@@ -1,6 +1,42 @@
 version: '3.4'
 
 services:
+  config-service-test:
+    image: ${REGISTRY:-dotnetfullmasterstack}/config-service:${PLATFORM:-linux}-${TAG:-latest}
+    build:
+      context: SpringCloud/config-service/
+      dockerfile: Dockerfile   
+      target: unittest
+    ports:
+      - "8888:8888"
+  eureka-service-test:
+    image: ${REGISTRY:-dotnetfullmasterstack}/eureka-service:${PLATFORM:-linux}-${TAG:-latest}
+    build:
+      context: SpringCloud/eureka-service/
+      dockerfile: Dockerfile    
+      target: unittest
+    ports:
+      - "8761:8761"
+  admin-service-test:
+    image: ${REGISTRY:-dotnetfullmasterstack}/admin-service:${PLATFORM:-linux}-${TAG:-latest}
+    build:
+      context: SpringCloud/admin-service/
+      dockerfile: Dockerfile
+      target: unittest
+    environment:
+        - EUREKA_SERVICE_URL=http://eureka-service:8761
+    ports:
+       - "8889:8889"
+  gateway-service-test:
+     environment:
+       - EUREKA_SERVICE_URL=http://eureka-service:8761
+     image: ${REGISTRY:-dotnetfullmasterstack}/gateway-service:${PLATFORM:-linux}-${TAG:-latest}
+     build:
+      context: SpringCloud/gateway-service/
+      dockerfile: Dockerfile  
+      target: unittest
+     ports:
+       - "8762:8762"
   customer-api-test:
     image: ${REGISTRY:-dotnetfullmasterstack}/customer.api-test:${PLATFORM:-linux}-${TAG:-latest}
     build:
@@ -33,3 +69,8 @@ services:
       target: unittest
     volumes:
       - ${BUILD_ARTIFACTSTAGINGDIRECTORY:-./tests-results/}:/tests
+  ui-aspnet-blazor-test:
+    image: ${REGISTRY:-dotnetfullmasterstack}/ui-aspnet-blazor:${PLATFORM:-linux}-${TAG:-latest}
+    build:
+      context: .
+      dockerfile: UI/MyBlazorUI/Dockerfile

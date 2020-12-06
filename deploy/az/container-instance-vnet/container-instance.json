@@ -1,0 +1,193 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "vnetName": {
+            "type": "string",
+            "defaultValue": "aci-vnet",
+            "metadata": {
+                "description": "VNet name"
+            }
+        },
+        "vnetAddressPrefix": {
+            "type": "string",
+            "defaultValue": "10.0.0.0/16",
+            "metadata": {
+                "description": "Address prefix"
+            }
+        },
+        "subnetAddressPrefix": {
+            "type": "string",
+            "defaultValue": "10.0.0.0/24",
+            "metadata": {
+                "description": "Subnet prefix"
+            }
+        },
+        "subnetName": {
+            "type": "string",
+            "defaultValue": "aci-subnet",
+            "metadata": {
+                "description": "Subnet name"
+            }
+        },
+        "location": {
+            "type": "string"
+        },
+        "containerName": {
+            "type": "string"
+        },
+        "imageType": {
+            "type": "string",
+            "allowedValues": [
+                "Public",
+                "Private"
+            ]
+        },
+        "imageName": {
+            "type": "string"
+        },
+        "osType": {
+            "type": "string",
+            "allowedValues": [
+                "Linux",
+                "Windows"
+            ]
+        },
+        "numberCpuCores": {
+            "type": "string"
+        },
+        "memory": {
+            "type": "string"
+        },
+        "restartPolicy": {
+            "type": "string",
+            "allowedValues": [
+                "OnFailure",
+                "Always",
+                "Never"
+            ]
+        },
+        "ipAddressType": {
+            "type": "string"
+        },
+        "ports": {
+            "type": "array"
+        },
+        "containers": {
+            "type": "array",
+            "defaultValue": [
+                "customer",
+                "kitchen",
+                "ordering",
+                "restaurant"
+            ]
+        }
+    },
+    "variables": {
+        "networkProfileName": "aci-networkProfile",
+        "interfaceConfigName": "eth0",
+        "interfaceIpConfig": "ipconfigprofile1"
+    },
+    "resources": [
+        {
+            "type": "Microsoft.Network/virtualNetworks",
+            "name": "[parameters('vnetName')]",
+            "apiVersion": "2020-05-01",
+            "location": "[parameters('location')]",
+            "properties": {
+                "addressSpace": {
+                    "addressPrefixes": [
+                        "[parameters('vnetAddressPrefix')]"
+                    ]
+                },
+                "subnets": [
+                    {
+                        "name": "[parameters('subnetName')]",
+                        "properties": {
+                            "addressPrefix": "[parameters('subnetAddressPrefix')]",
+                            "delegations": [
+                                {
+                                    "name": "DelegationService",
+                                    "properties": {
+                                        "serviceName": "Microsoft.ContainerInstance/containerGroups"
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "name": "[variables('networkProfileName')]",
+            "type": "Microsoft.Network/networkProfiles",
+            "apiVersion": "2020-05-01",
+            "location": "[parameters('location')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnetName'))]"
+            ],
+            "properties": {
+                "containerNetworkInterfaceConfigurations": [
+                    {
+                        "name": "[variables('interfaceConfigName')]",
+                        "properties": {
+                            "ipConfigurations": [
+                                {
+                                    "name": "[variables('interfaceIpConfig')]",
+                                    "properties": {
+                                        "subnet": {
+                                            "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('vnetName'), parameters('subnetName'))]"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "location": "[parameters('location')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/networkProfiles', variables('networkProfileName'))]"
+            ],
+            "name": "[concat('dotnetfullmasterstack-', parameters('containers')[copyIndex()])]",
+            "type": "Microsoft.ContainerInstance/containerGroups",
+            "apiVersion": "2018-10-01",
+            "copy": {
+                "name": "containers",
+                "count": "[length(parameters('containers'))]"
+            },
+            "properties": {
+                "containers": [
+                    {
+                        "name": "[parameters('containers')[copyIndex()]]",
+                        "properties": {
+                            "image": "[concat('dotnetfullmasterstack/', parameters('containers')[copyIndex()], '.api:linux-master')]",
+                            "resources": {
+                                "requests": {
+                                    "cpu": "[int(parameters('numberCpuCores'))]",
+                                    "memoryInGB": "[float(parameters('memory'))]"
+                                }
+                            },
+                            "ports": "[parameters('ports')]"
+                        }
+
+                    }
+                ],
+                "restartPolicy": "[parameters('restartPolicy')]",
+                "osType": "[parameters('osType')]",
+                "networkProfile": {
+                    "id": "[resourceId('Microsoft.Network/networkProfiles', variables('networkProfileName'))]"
+                },
+                // "ipAddress": {
+                //     "type": "[parameters('ipAddressType')]",
+                //     "ports": "[parameters('ports')]",
+                //     "dnsNameLabel": "[concat('dotnetfullmasterstack-', parameters('containers')[copyIndex()], '-api')]"
+                // }
+            },
+            "tags": {}
+
+        }
+    ]
+}

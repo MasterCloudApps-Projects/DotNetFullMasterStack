@@ -1,6 +1,22 @@
 version: '3.4'
 
 services:
+  config-service-test:
+    entrypoint:
+        - mvn
+        - test
+  eureka-service-test:
+    entrypoint:
+        - mvn
+        - test
+  admin-service-test:
+    entrypoint:
+        - mvn
+        - test  
+  gateway-service-test:
+    entrypoint:
+        - mvn
+        - test
   customer-api-test:
     entrypoint:
         - dotnet
@@ -41,3 +57,13 @@ services:
         - /p:CollectCoverage=true 
         - /p:CoverletOutputFormat=cobertura
         - /p:CoverletOutput=/tests/
+  ui-aspnet-blazor-test:
+    entrypoint:
+        - dotnet
+        - test
+        - --logger
+        - trx;LogFileName=/tests/customer-api-test-results.xml
+        - --collect:"XPlat Code Coverage"
+        - /p:CollectCoverage=true 
+        - /p:CoverletOutputFormat=cobertura
+        - /p:CoverletOutput=/tests

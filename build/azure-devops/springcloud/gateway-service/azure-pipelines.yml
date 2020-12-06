@@ -1,0 +1,25 @@
+variables:
+    registryEndpoint: dotnetfullmasterstack
+trigger:
+  branches:
+    include:
+    - master
+  paths:
+    include:
+    - src/SpringCloud/gateway-service/*
+    - build/azure-devops/build-jobs.yml
+    - build/azure-devops/build-docker.yml
+    - build/azure-devops/springcloud/gateway-service/*
+    - deploy/k8s/helm/springcloud/gateway-service/*
+jobs:
+- template: ../../build-jobs.yaml
+  parameters:
+    services: gateway-service
+    registryEndpoint: $(registryEndpoint)
+    helmfrom: $(Build.SourcesDirectory)/deploy/k8s/helm
+    helmto: $(Build.ArtifactStagingDirectory)/deploy/k8s/helm
+- template: ../../build-docker.yaml
+  parameters:
+    image: gateway-service
+    branch: $(Build.SourceBranchName)
+    registryEndpoint: $(registryEndpoint)

@@ -3,6 +3,8 @@ parameters:
   registryEndpoint: ''
   helmfrom: ''
   helmto: ''
+  acifrom: ''
+  acito: ''
   
 jobs:
 - job: BuildContainersForPR_Linux
@@ -48,7 +50,6 @@ jobs:
       testResultsFormat: 'VSTest'
       testResultsFiles: '**/${{ parameters.services }}-test-results.xml' 
       searchFolder: '$(Build.ArtifactStagingDirectory)'
-
   - task: PublishCodeCoverageResults@1
     inputs:
       codeCoverageTool: 'Cobertura'
@@ -77,10 +78,12 @@ jobs:
       dockerComposeFileArgs: |
         TAG=${{ variables['Build.SourceBranchName'] }}
   - task: CopyFiles@2
+    displayName: Copy helm files
     inputs:
       sourceFolder: ${{ parameters.helmfrom }}
       targetFolder: ${{ parameters.helmto }}
   - task: PublishBuildArtifacts@1
+    displayName: Publish helm files
     inputs:
       pathtoPublish: ${{ parameters.helmto }}
       artifactName: helm

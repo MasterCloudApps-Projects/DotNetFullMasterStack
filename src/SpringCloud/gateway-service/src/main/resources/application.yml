@@ -1,0 +1,40 @@
+server:
+  port: 8181
+
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://eureka-service:8761/eureka/
+  instance:
+    preferIpAddress: true
+
+zuul:
+  ignored-services: admin-service, config-service, discovery-service, gateway-service
+  sensitiveHeaders:
+  host:
+    connect-timeout-millis: 20000
+    socket-timeout-millis: 20000
+
+# ribbon:
+#   ReadTimeout: 20000
+#   ConnectTimeout: 20000
+  
+management:
+  endpoints:
+    enabled-by-default: false
+    jmx:
+      exposure:
+        exclude: "*"
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: always
+      enabled: true
+    info:
+      enabled: true
+    metrics:
+      enabled: true

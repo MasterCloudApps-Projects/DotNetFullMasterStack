@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Restaurant.API.Infrastructure;
+using Steeltoe.Management.Endpoint;
 
 namespace Restaurant.API
 {
@@ -12,6 +13,7 @@ namespace Restaurant.API
         public static IWebHost CreateHostBuilder(string[] args) =>
            WebHost.CreateDefaultBuilder(args)
            .UseStartup<Startup>()
+           .AddAllActuators()
            .Build();
 
         public static void Main(string[] args)

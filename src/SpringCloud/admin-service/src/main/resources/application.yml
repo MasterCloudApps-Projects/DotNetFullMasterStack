@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: admin-service
+  boot:
+    admin:
+      ui:
+        title: 'DotNetFullMasterStack:· Springboot admin service"'
+server:
+  port: 8889
+
+eureka:
+  client:
+    serviceUrl: 
+      defaultZone: http://eureka-service:8761/eureka/
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

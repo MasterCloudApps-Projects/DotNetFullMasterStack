@@ -1,0 +1,26 @@
+variables:
+    registryEndpoint: dotnetfullmasterstack
+trigger:
+  branches:
+    include:
+    - master
+  paths:
+    include:
+    - src/BuildingBlocks/*
+    - src/Services/Restaurant/*
+    - build/azure-devops/build-jobs.yml
+    - build/azure-devops/build-docker.yml
+    - build/azure-devops/ui-aspnet-blazor/*
+    - deploy/k8s/helm/ui-aspnet-blazor/*
+jobs:
+- template: ../build-jobs.yaml
+  parameters:
+    services: ui-aspnet-blazor
+    registryEndpoint: $(registryEndpoint)
+    helmfrom: $(Build.SourcesDirectory)/deploy/k8s/helm
+    helmto: $(Build.ArtifactStagingDirectory)/deploy/k8s/helm
+- template: ../build-docker.yaml
+  parameters:
+    image: ui-aspnet-blazor
+    branch: $(Build.SourceBranchName)
+    registryEndpoint: $(registryEndpoint)
