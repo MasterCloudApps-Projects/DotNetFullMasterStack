@@ -16,6 +16,7 @@
         },
         "dnsPrefix": {
             "type": "string",
+            "defaultValue": "DotNetFullMasterStack-dns",
             "metadata": {
                 "description": "Optional DNS prefix to use with hosted Kubernetes API server FQDN."
             }
@@ -31,15 +32,16 @@
         },
         "kubernetesVersion": {
             "type": "string",
-            "defaultValue": "1.7.7",
+            "defaultValue": "1.18.10",
+            "allowedValues": [ "1.18.10" ],
             "metadata": {
                 "description": "The version of Kubernetes."
             }
         },
         "networkPlugin": {
             "type": "string",
+            "defaultValue": "kubenet",
             "allowedValues": [
-                "azure",
                 "kubenet"
             ],
             "metadata": {
@@ -53,20 +55,20 @@
                 "description": "Boolean flag to turn on and off of RBAC."
             }
         },
-        "vmssNodePool": {
-            "type": "bool",
-            "defaultValue": false,
-            "metadata": {
-                "description": "Boolean flag to turn on and off of virtual machine scale sets"
-            }
-        },
-        "windowsProfile": {
-            "type": "bool",
-            "defaultValue": false,
-            "metadata": {
-                "description": "Boolean flag to turn on and off of virtual machine scale sets"
-            }
-        },
+        // "vmssNodePool": {
+        //     "type": "bool",
+        //     "defaultValue": false,
+        //     "metadata": {
+        //         "description": "Boolean flag to turn on and off of virtual machine scale sets"
+        //     }
+        // },
+        // "windowsProfile": {
+        //     "type": "bool",
+        //     "defaultValue": false,
+        //     "metadata": {
+        //         "description": "Boolean flag to turn on and off of virtual machine scale sets"
+        //     }
+        // },
         "enablePrivateCluster": {
             "type": "bool",
             "defaultValue": false,
@@ -101,31 +103,10 @@
             "metadata": {
                 "description": "Specify the region for your OMS workspace."
             }
-        },
-        "workspaceName": {
-            "type": "string",
-            "metadata": {
-                "description": "Specify the name of the OMS workspace."
-            }
-        },
-        "omsWorkspaceId": {
-            "type": "string",
-            "metadata": {
-                "description": "Specify the resource id of the OMS workspace."
-            }
-        },
-        "omsSku": {
-            "type": "string",
-            "defaultValue": "standalone",
-            "allowedValues": [
-                "free",
-                "standalone",
-                "pernode"
-            ],
-            "metadata": {
-                "description": "Select the SKU for your workspace."
-            }
         }
+    },
+    "variables": {
+        "omsWorkspaceId": "[concat('/subscriptions/', subscription().subscriptionId, '/resourcegroups/',resourceGroup().name,'/providers/microsoft.operationalinsights/workspaces/', resourceGroup().name,'-',subscription().subscriptionId)]"
     },
     "resources": [
         {
@@ -171,7 +152,7 @@
                     "omsagent": {
                         "enabled": "[parameters('enableOmsAgent')]",
                         "config": {
-                            "logAnalyticsWorkspaceResourceID": "[parameters('omsWorkspaceId')]"
+                            "logAnalyticsWorkspaceResourceID": "[variables('omsWorkspaceId')]"
                         }
                     }
                 }
@@ -185,8 +166,8 @@
             "type": "Microsoft.Resources/deployments",
             "name": "SolutionDeployment-20201205161620",
             "apiVersion": "2017-05-10",
-            "resourceGroup": "[split(parameters('omsWorkspaceId'),'/')[4]]",
-            "subscriptionId": "[split(parameters('omsWorkspaceId'),'/')[2]]",
+            "resourceGroup": "[split(variables('omsWorkspaceId'),'/')[4]]",
+            "subscriptionId": "[split(variables('omsWorkspaceId'),'/')[2]]",
             "properties": {
                 "mode": "Incremental",
                 "template": {
@@ -199,12 +180,12 @@
                             "apiVersion": "2015-11-01-preview",
                             "type": "Microsoft.OperationsManagement/solutions",
                             "location": "[parameters('workspaceRegion')]",
-                            "name": "[concat('ContainerInsights', '(', split(parameters('omsWorkspaceId'),'/')[8], ')')]",
+                            "name": "[concat('ContainerInsights', '(', split(variables('omsWorkspaceId'),'/')[8], ')')]",
                             "properties": {
-                                "workspaceResourceId": "[parameters('omsWorkspaceId')]"
+                                "workspaceResourceId": "[variables('omsWorkspaceId')]"
                             },
                             "plan": {
-                                "name": "[concat('ContainerInsights', '(', split(parameters('omsWorkspaceId'),'/')[8], ')')]",
+                                "name": "[concat('ContainerInsights', '(', split(variables('omsWorkspaceId'),'/')[8], ')')]",
                                 "product": "[concat('OMSGallery/', 'ContainerInsights')]",
                                 "promotionCode": "",
                                 "publisher": "Microsoft"
@@ -214,37 +195,6 @@
                 }
             },
             "dependsOn": []
-        },
-        {
-            "type": "Microsoft.Resources/deployments",
-            "name": "ClusterMonitoringMetricPulisherRoleAssignmentDepl-20201205161620",
-            "apiVersion": "2017-05-10",
-            "resourceGroup": "tfm",
-            "subscriptionId": "5935a68a-2476-4a58-bd81-a11d0ee06465",
-            "properties": {
-                "mode": "Incremental",
-                "template": {
-                    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-                    "contentVersion": "1.0.0.0",
-                    "parameters": {},
-                    "variables": {},
-                    "resources": [
-                        {
-                            "type": "Microsoft.ContainerService/managedClusters/providers/roleAssignments",
-                            "apiVersion": "2018-01-01-preview",
-                            "name": "DotNetFullMasterStack/Microsoft.Authorization/dfcccdff-5f81-4d83-a6b4-f50738772824",
-                            "properties": {
-                                "roleDefinitionId": "[concat('/subscriptions/', subscription().subscriptionId, '/providers/Microsoft.Authorization/roleDefinitions/', '3913510d-42f4-4e42-8a64-420c390055eb')]",
-                                "principalId": "[reference(parameters('resourceName')).addonProfiles.omsagent.identity.objectId]",
-                                "scope": "/subscriptions/5935a68a-2476-4a58-bd81-a11d0ee06465/resourceGroups/tfm/providers/Microsoft.ContainerService/managedClusters/DotNetFullMasterStack"
-                            }
-                        }
-                    ]
-                }
-            },
-            "dependsOn": [
-                "/subscriptions/5935a68a-2476-4a58-bd81-a11d0ee06465/resourceGroups/tfm/providers/Microsoft.ContainerService/managedClusters/DotNetFullMasterStack"
-            ]
         }
     ],
     "outputs": {
