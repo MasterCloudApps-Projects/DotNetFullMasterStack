@@ -1,0 +1,42 @@
+@startuml
+left to right direction
+
+actor User 
+package "DotNetFullMasterStack" {
+component BlazorUI
+
+package "dotnet core micro" {
+    component [customer service] as customer
+    component [kitchen service] as kitchen
+    component [ordering service] as ordering
+    component [restaurant service] as restaurnat
+}
+
+package "Spring cloud"   {
+    component [gateway service] as gateway
+    component [admin service] as admin
+    component [config service] as config
+    component [eureka service] as eureka
+}
+
+User --> BlazorUI
+BlazorUI --> gateway
+gateway <-up-> customer
+gateway <-up-> kitchen
+gateway <-up-> ordering
+gateway <-up-> restaurnat
+
+eureka <-up.. customer
+eureka <-up.. kitchen
+eureka <-up.. ordering
+eureka <-up.. restaurnat
+
+
+database "SQL Sever" as sqlserver
+sqlserver --> customer
+sqlserver --> kitchen
+sqlserver --> ordering
+sqlserver --> restaurnat
+}
+
+@enduml
