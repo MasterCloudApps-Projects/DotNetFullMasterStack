@@ -7,7 +7,6 @@ CreateGroup()
 }   # end of CreateGroup()
 
 
-
 deployresources()
 {
 	echo "Deploying ARM template $path_and_filename.json in resource group $resource_group"
